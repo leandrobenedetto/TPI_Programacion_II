@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de | Gestor de Tareas</title>
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // aplica el tema guardado antes de pintar
+        (function () {
+            const tema = localStorage.getItem("theme") || "light";
+            document.documentElement.setAttribute("data-theme", tema);
+        })();
+    </script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-content">
+            <img src="assets/icons/logo.png" alt="Logo del gestor de tareas" class="logo">
+            <h1>Gestor de Tareas</h1>
+        </div>
+
+        <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+            <span class="theme-icon">🌙</span>
+        </button>
+
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="agregar.html">Agregar tarea</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="acerca.html" aria-current="page">Acerca de</a></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="about-section">
+            <h2>Sobre el proyecto</h2>
+            <p>
+                Gestor de Tareas es una aplicación web para crear, organizar y hacer
+                seguimiento de tareas personales, con persistencia de datos mediante
+                localStorage. Desarrollado como Trabajo Práctico Nº1 de Programación II.
+            </p>
+        </section>
+
+        <section class="about-section">
+            <h3>Tecnologías usadas</h3>
+            <ul class="tech-list">
+                <li>HTML5 semántico</li>
+                <li>CSS3 (Flexbox y Grid)</li>
+                <li>JavaScript (DOM, eventos, localStorage)</li>
+            </ul>
+        </section>
+
+        <section class="about-section">
+            <h3>Equipo</h3>
+            <ul class="team-list">
+                <li>Leandro</li>
+                <li>Camila</li>
+                <li>Emanuel</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Trabajo Práctico Nº1 — Programación II — UTN Facultad Regional Rosario</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
