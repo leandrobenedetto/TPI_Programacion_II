@@ -36,8 +36,100 @@
         </nav>
         </div>
     </header>
-    <main>
+     <main>
+        <section>
+            <h2>Nueva tarea</h2>
 
+            <form>
+
+                <div>
+                    <label for="titulo">Título *</label>
+                    <div>
+                        <input type="text" id="titulo" name="titulo" required minlength="3" maxlength="60">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="descripcion">Descripción</label>
+                    <div>
+                        <textarea id="descripcion" name="descripcion" maxlength="200" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="fechaVencimiento">Fecha de vencimiento *</label>
+                    <div>
+                        <input type="date" id="fechaVencimiento" name="fechaVencimiento" required>
+                        <span class="status-icon" id="icon-fechaVencimiento"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="prioridad">Prioridad *</label>
+                    <div>
+                        <select id="prioridad" name="prioridad" required>
+                            <option value="" disabled selected>Elegí una prioridad</option>
+                            <option value="alta">Alta</option>
+                            <option value="media">Media</option>
+                            <option value="baja">Baja</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="categoria">Categoría *</label>
+                    <div>
+                        <select id="categoria" name="categoria" required>
+                            <option value="" disabled selected>Elegí una categoría</option>
+                            <option value="trabajo">Trabajo</option>
+                            <option value="estudio">Estudio</option>
+                            <option value="personal">Personal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email">Email de contacto</label>
+                    <div>
+                        <input type="email" id="email" name="email" placeholder="opcional@ejemplo.com">
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>Etiquetas</legend>
+                    <div>
+                        <div>
+                            <input type="checkbox" id="etiqueta-urgente" name="etiquetas" value="urgente">
+                            <label for="etiqueta-urgente">Urgente</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="etiqueta-importante" name="etiquetas" value="importante">
+                            <label for="etiqueta-importante">Importante</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="etiqueta-recordatorio" name="etiquetas" value="recordatorio">
+                            <label for="etiqueta-recordatorio">Avisarme antes del vencimiento</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Estado inicial *</legend>
+                    <div>
+                        <div>
+                            <input type="radio" id="estado-pendiente" name="estado" value="pendiente" checked>
+                            <label for="estado-pendiente">Pendiente</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="estado-progreso" name="estado" value="en-progreso">
+                            <label for="estado-progreso">En progreso</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <button type="submit">Guardar tarea</button>
+            </form>
+        </section>
     </main>
 
     <footer class="site-footer">
