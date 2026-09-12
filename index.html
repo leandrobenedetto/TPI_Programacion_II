@@ -1,13 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Tareas | Gestor de Tareas</title>
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <link rel="js" href="app.js">
-    <title>To-do List App</title>
+    <script>
+        // aplica el tema guardado antes de pintar, para evitar el flash blanco/negro
+        (function () {                                                  // se declara una función
+            const tema = localStorage.getItem("theme") || "light";      // una constante que almacena el tema guardado O el tema por defecto
+            document.documentElement.setAttribute("data-theme", tema);  // se aplica el tema al elemento raíz (al <html>)
+        })();
+    </script>
 </head>
 <body>
 
+    <header class="site-header">
+        <div class="header-content">
+            <img src="assets/icons/logo.png" alt="Logo del gestor de tareas" class="logo">
+            <h1>Gestor de Tareas</h1>
+        </div>
+
+        <!-- El "botón hamburguesa" se muestra nomás como breakpoint en tablet/celular -->
+        <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+            <span class="theme-icon">🌙</span>
+        </button>
+
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" aria-current="page">Inicio</a></li>
+                <li><a href="agregar.html">Agregar tarea</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="acerca.html">Acerca de</a></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="tasks-toolbar">
+            <h2>Mis tareas</h2>
+
+            <div class="filters">
+                <select id="filter-priority">
+                    <option value="">Todas las prioridades</option>
+                    <option value="alta">Alta</option>
+                    <option value="media">Media</option>
+                    <option value="baja">Baja</option>
+                </select>
+                <select id="filter-category">
+                    <option value="">Todas las categorías</option>
+                    <option value="trabajo">Trabajo</option>
+                    <option value="estudio">Estudio</option>
+                    <option value="personal">Personal</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="tasks-list-section">
+                <!-- app.js renderiza acá cada tarea del modelo de datos:
+                { id, titulo, descripcion, fechaVencimiento, prioridad, categoria, recordatorio, completado } -->
+            <div id="task-list" class="task-grid">
+                <!-- Vacío porque se renderiza desde app.js. Se llena con datos en tiempo de ejecución -->
+            </div>
+
+            <p id="empty-state" class="empty-state" hidden>
+                No tenés tareas todavía. <a href="agregar.html">Agregá la primera</a>.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Trabajo Práctico Nº1 — Programación II — UTN Facultad Regional Rosario</p>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
