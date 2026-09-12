@@ -36,35 +36,33 @@
         </nav>
         </div>
     </header>
-     <main>
-        <section>
+    <main class="container">
+        <section class="form-section">
             <h2>Nueva tarea</h2>
 
-            <form>
-
-                <div>
+            <form id="task-form" novalidate>
+                <div class="form-field">
                     <label for="titulo">Título *</label>
                     <div>
                         <input type="text" id="titulo" name="titulo" required minlength="3" maxlength="60">
                     </div>
                 </div>
 
-                <div>
+                <div class="form-field">
                     <label for="descripcion">Descripción</label>
                     <div>
                         <textarea id="descripcion" name="descripcion" maxlength="200" rows="3"></textarea>
                     </div>
                 </div>
 
-                <div>
+                <div class="form-field">
                     <label for="fechaVencimiento">Fecha de vencimiento *</label>
                     <div>
                         <input type="date" id="fechaVencimiento" name="fechaVencimiento" required>
-                        <span class="status-icon" id="icon-fechaVencimiento"></span>
                     </div>
                 </div>
 
-                <div>
+                <div class="form-field">
                     <label for="prioridad">Prioridad *</label>
                     <div>
                         <select id="prioridad" name="prioridad" required>
@@ -76,7 +74,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="form-field">
                     <label for="categoria">Categoría *</label>
                     <div>
                         <select id="categoria" name="categoria" required>
@@ -88,14 +86,14 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="form-field">
                     <label for="email">Email de contacto</label>
                     <div>
                         <input type="email" id="email" name="email" placeholder="opcional@ejemplo.com">
                     </div>
                 </div>
 
-                <fieldset>
+                <fieldset class="form-field">
                     <legend>Etiquetas</legend>
                     <div>
                         <div>
@@ -113,7 +111,7 @@
                     </div>
                 </fieldset>
 
-                <fieldset>
+                <fieldset class="form-field">
                     <legend>Estado inicial *</legend>
                     <div>
                         <div>
