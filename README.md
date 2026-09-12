@@ -33,13 +33,7 @@ automáticamente en el `localStorage` del navegador que se use.
 
 ## Capturas de pantalla
 
-| Lista de tareas | Acerca de |
-|---|---|
-| ![Lista de tareas](assets/screenshots/Inicio.png) | ![Acerca de](assets/screenshots/AcercaDe.png) |
-
-| Estadísticas | Modo oscuro |
-|---|---|
-| ![Estadísticas](assets/screenshots/Estadisticas.png) | ![Modo oscuro](assets/screenshots/ModoOscuro.png) |
+// AGREGAR CUATRO CAPTURAS DE PANTALLA //
 
 ## Funcionalidades implementadas
 
