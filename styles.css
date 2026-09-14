@@ -154,8 +154,6 @@ body {
 }
 
 
-
-
 /* FORMULARIO */
 .form-section {
     background: var(--color-surface);
@@ -176,7 +174,6 @@ body {
     flex-direction: column;
     gap: 6px;
 }
-
 
 .form-field-checkbox {
     flex-direction: row;
@@ -207,4 +204,3 @@ body {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(58, 109, 240, 0.15);
 }
-

@@ -7,7 +7,11 @@
     <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script>
-
+          // aplica el tema guardado antes de pintar
+        (function () {
+            const tema = localStorage.getItem("theme") || "light";
+            document.documentElement.setAttribute("data-theme", tema);
+        })();
     </script>
 </head>
 <body>
@@ -40,92 +44,111 @@
         <section class="form-section">
             <h2>Nueva tarea</h2>
 
+            <!-- 8 campos de tipos variados: text, textarea, date, select, select, email,
+                 checkbox group y radio group. Cada campo con validación tiene un
+                 <span class="status-icon"> (✓/✗) y un <span class="error-message"> al lado,
+                 completados en tiempo real desde script.js -->
             <form id="task-form" novalidate>
+
                 <div class="form-field">
                     <label for="titulo">Título *</label>
-                    <div>
+                    <div class="input-with-icon">
                         <input type="text" id="titulo" name="titulo" required minlength="3" maxlength="60">
+                        <span class="status-icon" id="icon-titulo"></span>
                     </div>
+                    <span class="error-message" id="error-titulo"></span>
                 </div>
 
                 <div class="form-field">
                     <label for="descripcion">Descripción</label>
-                    <div>
+                    <div class="input-with-icon">
                         <textarea id="descripcion" name="descripcion" maxlength="200" rows="3"></textarea>
+                        <span class="status-icon" id="icon-descripcion"></span>
                     </div>
+                    <span class="error-message" id="error-descripcion"></span>
                 </div>
 
                 <div class="form-field">
                     <label for="fechaVencimiento">Fecha de vencimiento *</label>
-                    <div>
+                    <div class="input-with-icon">
                         <input type="date" id="fechaVencimiento" name="fechaVencimiento" required>
+                        <span class="status-icon" id="icon-fechaVencimiento"></span>
                     </div>
+                    <span class="error-message" id="error-fechaVencimiento"></span>
                 </div>
 
                 <div class="form-field">
                     <label for="prioridad">Prioridad *</label>
-                    <div>
+                    <div class="input-with-icon">
                         <select id="prioridad" name="prioridad" required>
                             <option value="" disabled selected>Elegí una prioridad</option>
                             <option value="alta">Alta</option>
                             <option value="media">Media</option>
                             <option value="baja">Baja</option>
                         </select>
+                        <span class="status-icon" id="icon-prioridad"></span>
                     </div>
+                    <span class="error-message" id="error-prioridad"></span>
                 </div>
 
                 <div class="form-field">
                     <label for="categoria">Categoría *</label>
-                    <div>
+                    <div class="input-with-icon">
                         <select id="categoria" name="categoria" required>
                             <option value="" disabled selected>Elegí una categoría</option>
                             <option value="trabajo">Trabajo</option>
                             <option value="estudio">Estudio</option>
                             <option value="personal">Personal</option>
                         </select>
+                        <span class="status-icon" id="icon-categoria"></span>
                     </div>
+                    <span class="error-message" id="error-categoria"></span>
                 </div>
 
                 <div class="form-field">
                     <label for="email">Email de contacto</label>
-                    <div>
+                    <div class="input-with-icon">
                         <input type="email" id="email" name="email" placeholder="opcional@ejemplo.com">
+                        <span class="status-icon" id="icon-email"></span>
                     </div>
+                    <span class="error-message" id="error-email"></span>
                 </div>
 
-                <fieldset class="form-field">
+                <fieldset class="form-field form-field-group">
                     <legend>Etiquetas</legend>
-                    <div>
-                        <div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
                             <input type="checkbox" id="etiqueta-urgente" name="etiquetas" value="urgente">
                             <label for="etiqueta-urgente">Urgente</label>
                         </div>
-                        <div>
+                        <div class="checkbox-item">
                             <input type="checkbox" id="etiqueta-importante" name="etiquetas" value="importante">
                             <label for="etiqueta-importante">Importante</label>
                         </div>
-                        <div>
+                        <div class="checkbox-item">
                             <input type="checkbox" id="etiqueta-recordatorio" name="etiquetas" value="recordatorio">
                             <label for="etiqueta-recordatorio">Avisarme antes del vencimiento</label>
                         </div>
                     </div>
                 </fieldset>
 
-                <fieldset class="form-field">
+                <fieldset class="form-field form-field-group">
                     <legend>Estado inicial *</legend>
-                    <div>
-                        <div>
+                    <div class="radio-group">
+                        <div class="radio-item">
                             <input type="radio" id="estado-pendiente" name="estado" value="pendiente" checked>
                             <label for="estado-pendiente">Pendiente</label>
                         </div>
-                        <div>
+                        <div class="radio-item">
                             <input type="radio" id="estado-progreso" name="estado" value="en-progreso">
                             <label for="estado-progreso">En progreso</label>
                         </div>
                     </div>
+                    <span class="error-message" id="error-estado"></span>
                 </fieldset>
 
                 <button type="submit">Guardar tarea</button>
+                <p id="form-feedback" class="form-feedback" role="status"></p>
             </form>
         </section>
     </main>
