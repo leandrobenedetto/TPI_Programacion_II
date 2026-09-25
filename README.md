@@ -26,7 +26,7 @@ No requiere instalación ni dependencias, ya que es HTML/CSS/JS puro sin backend
 1. Cloná o descargá este repositorio.
 2. Abrí el archivo `index.html` en tu navegador (doble clic, o clic derecho →
    "Abrir con" tu navegador preferido).
-3. Opcional: podés usar la extensión "Live Server" de VS Code teninendo el código 
+3. Opcional: podés usar la extensión "Live Server" de VS Code teniendo el código 
    allí
 
 No hace falta ninguna configuración adicional: los datos se guardan
@@ -34,7 +34,18 @@ automáticamente en el `localStorage` del navegador que se use.
 
 ## Capturas de pantalla
 
-// AGREGAR CUATRO CAPTURAS DE PANTALLA //
+### Página principal
+![Página principal con tareas pendientes](assets/img/inicio.png)
+
+### Agregar tarea
+![Formulario de tarea, parte 1](assets/img/form-part1.png)
+![Formulario de tarea, parte 2](assets/img/form-part2.png)
+
+### Estadísticas
+![Resumen de estadísticas](assets/img/estadisticas.png)
+
+### Modo oscuro
+![Acerca de en modo oscuro](assets/img/about-modo-oscuro.png)
 
 ## Funcionalidades implementadas
 
@@ -70,7 +81,7 @@ automáticamente en el `localStorage` del navegador que se use.
 │  app.js
 ├── /assets
 │   └── /icons          → favicon.ico, logo.png
-|   └── /screenshots    → capturas de pantalla
+|   └── /img            → capturas de pantalla
 ```
 
 ## Equipo

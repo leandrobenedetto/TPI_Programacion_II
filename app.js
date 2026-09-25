@@ -233,7 +233,7 @@ const initMenuToggle = () => {
 // --- index.html ---
 const initTaskList = () => {
     const taskList = document.getElementById("task-list");
-
+    if(!taskList) return;
     const emptyState = document.getElementById("empty-state");
     const filterPriority = document.getElementById("filter-priority");
     const filterCategory = document.getElementById("filter-category");
