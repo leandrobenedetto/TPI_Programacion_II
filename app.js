@@ -22,6 +22,7 @@ const initTaskForm = () => {
         categoria: document.getElementById("categoria"),
         email: document.getElementById("email"),
     };
+
     // Campos con validación (input/select/textarea de valor único)
     const camposSimples = ["titulo", "descripcion", "fechaVencimiento", "prioridad", "categoria", "email"];
     // Grupo de checkboxes (etiquetas) y grupo de radio buttons (estado)
@@ -187,4 +188,167 @@ const initTaskForm = () => {
             window.location.href = "index.html";
         }, 700);
     });
+
 };
+
+// Toggle de tema claro/oscuro (en las 4 páginas):
+// EL TEMA YA SE APLICA DE ENTRADA CON UN SCRIPT "INLINE" EN EL <head> DE CADA PÁGINA (evita un "flash" como se dijo en index.html); acá solo se maneja el click y el ícono del botón
+const initThemeToggle = () => {
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (!toggleBtn) return; // verificador de botón
+
+    const icon = toggleBtn.querySelector(".theme-icon");
+
+    const actualizarIcono = () => {
+        const temaActual = document.documentElement.getAttribute("data-theme") || "light";
+        if (icon) icon.textContent = temaActual === "dark" ? "☀️" : "🌙";
+        toggleBtn.setAttribute(
+            "aria-label",
+            temaActual === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"
+        );
+    };
+
+    actualizarIcono();
+
+    toggleBtn.addEventListener("click", () => {
+        const temaActual = document.documentElement.getAttribute("data-theme") || "light";
+        const nuevoTema = temaActual === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", nuevoTema);
+        localStorage.setItem("theme", nuevoTema);
+        actualizarIcono();
+    });
+};
+
+// MENÚ HAMBURGUESA (en las 4 páginas)
+const initMenuToggle = () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    if (!menuToggle) return;
+
+    menuToggle.addEventListener("click", () => {
+        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+};
+
+// --- index.html ---
+const initTaskList = () => {
+    const taskList = document.getElementById("task-list");
+
+    const emptyState = document.getElementById("empty-state");
+    const filterPriority = document.getElementById("filter-priority");
+    const filterCategory = document.getElementById("filter-category");
+
+    const ESTADO_LABEL = { pendiente: "Pendiente", "en-progreso": "En progreso" };
+    const ETIQUETA_LABEL = { urgente: "Urgente", importante: "Importante", recordatorio: "🔔 Recordatorio" };
+
+    const createTaskCard = (task) => {
+        const etiquetas = Array.isArray(task.etiquetas) ? task.etiquetas : [];
+        const card = document.createElement("div");
+        card.className = "task-card" + (task.completado ? " completed" : "");
+        card.innerHTML = `
+            <h3 class="task-title">${task.titulo}</h3>
+            ${task.descripcion ? `<p class="task-description">${task.descripcion}</p>` : ""}
+            <p class="task-meta">
+                📅 ${task.fechaVencimiento || "Sin fecha"} ·
+                🚩 ${PRIORIDAD_LABEL[task.prioridad] || task.prioridad} ·
+                🏷️ ${CATEGORIA_LABEL[task.categoria] || task.categoria}
+                ${task.estado ? ` · 🚦 ${ESTADO_LABEL[task.estado] || task.estado}` : ""}
+            </p>
+            ${task.email ? `<p class="task-email">✉️ ${task.email}</p>` : ""}
+            ${etiquetas.length ? `<p class="task-tags">${etiquetas.map((e) => ETIQUETA_LABEL[e] || e).join(" · ")}</p>` : ""}
+            <div class="task-actions">
+                <button data-action="toggle" data-id="${task.id}">✅</button>
+                <button data-action="edit" data-id="${task.id}">🗒️</button>
+                <button data-action="delete" data-id="${task.id}">⛔</button>
+            </div>
+        `;
+
+        return card;
+    };
+
+    const renderTasks = () => {
+        let tasks = getTasks();
+
+        const prioridadFiltro = filterPriority ? filterPriority.value : "";
+        const categoriaFiltro = filterCategory ? filterCategory.value : "";
+
+        if (prioridadFiltro) {
+            tasks = tasks.filter((t) => t.prioridad === prioridadFiltro);
+        }
+        if (categoriaFiltro) {
+            tasks = tasks.filter((t) => t.categoria === categoriaFiltro);
+        }
+
+        taskList.innerHTML = "";
+
+        if (tasks.length === 0) {
+            if (emptyState) emptyState.hidden = false;
+            return;
+        }
+        if (emptyState) emptyState.hidden = true;
+
+        tasks.forEach((task) => taskList.appendChild(createTaskCard(task)));
+    };
+
+    taskList.addEventListener("click", (e) => {
+        const button = e.target.closest("button[data-action]");
+        if (!button) return;
+
+        const id = Number(button.dataset.id);
+        const action = button.dataset.action;
+        let tasks = getTasks();
+
+        if (action === "toggle") {
+            tasks = tasks.map((t) => (t.id === id ? { ...t, completado: !t.completado } : t));
+            saveTasks(tasks);
+            renderTasks();
+        } else if (action === "delete") {
+            if (confirm("¿Eliminar esta tarea?")) {
+                tasks = tasks.filter((t) => t.id !== id);
+                saveTasks(tasks);
+                renderTasks();
+            }
+        } else if (action === "edit") {
+            window.location.href = `agregar.html?id=${id}`;
+        }
+    });
+
+    if (filterPriority) filterPriority.addEventListener("change", renderTasks);
+    if (filterCategory) filterCategory.addEventListener("change", renderTasks);
+
+    renderTasks();
+};
+
+// --- estadisticas.html ---
+const initStats = () => {
+    const statTotal = document.getElementById("stat-total");
+    if (!statTotal) return;
+
+    const tasks = getTasks();
+
+    const completadas = tasks.filter((t) => t.completado).length;
+    const pendientes = tasks.length - completadas;
+
+    statTotal.textContent = tasks.length;
+    document.getElementById("stat-completadas").textContent = completadas;
+    document.getElementById("stat-pendientes").textContent = pendientes;
+
+    ["alta", "media", "baja"].forEach((prioridad) => {
+        const el = document.getElementById(`stat-${prioridad}`);
+        if (el) el.textContent = tasks.filter((t) => t.prioridad === prioridad).length;
+    });
+
+    ["trabajo", "estudio", "personal"].forEach((categoria) => {
+        const el = document.getElementById(`stat-${categoria}`);
+        if (el) el.textContent = tasks.filter((t) => t.categoria === categoria).length;
+    });
+};
+
+// Inicialización general
+document.addEventListener("DOMContentLoaded", () => {
+    initThemeToggle();
+    initMenuToggle();
+    initTaskList();
+    initTaskForm();
+    initStats();
+});
