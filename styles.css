@@ -153,6 +153,47 @@ body {
     transform: translateY(-8.5px) rotate(-45deg);
 }
 
+/* LAYOUT GENERAL (GRID) */
+.container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.task-grid,
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+/* -- ESTADÍSTICAS -- */
+.stats-section {
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.stat-label {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
 
 /* FORMULARIO */
 .form-section {
