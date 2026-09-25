@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas | Gestor de Tareas</title>
+    <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // aplica el tema guardado antes de pintar
+        (function () {
+            const tema = localStorage.getItem("theme") || "light";
+            document.documentElement.setAttribute("data-theme", tema);
+        })();
+    </script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-content">
+            <img src="assets/icons/logo.png" alt="Logo del gestor de tareas" class="logo">
+            <h1>Gestor de Tareas</h1>
+        </div>
+
+        <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+            <span class="theme-icon">🌙</span>
+        </button>
+
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="agregar.html">Agregar tarea</a></li>
+                <li><a href="estadisticas.html" aria-current="page">Estadísticas</a></li>
+                <li><a href="acerca.html">Acerca de</a></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="stats-section">
+            <h2>Resumen de tareas</h2>
+
+            <!-- Grid de tarjetas con contadores, poblados desde localStorage por script.js -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-total">0</span>
+                    <span class="stat-label">Tareas totales</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-completadas">0</span>
+                    <span class="stat-label">Completadas</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-pendientes">0</span>
+                    <span class="stat-label">Pendientes</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h3>Por prioridad</h3>
+            <div class="stats-grid" id="stats-by-priority">
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-alta">0</span>
+                    <span class="stat-label">Alta</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-media">0</span>
+                    <span class="stat-label">Media</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-baja">0</span>
+                    <span class="stat-label">Baja</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h3>Por categoría</h3>
+            <div class="stats-grid" id="stats-by-category">
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-trabajo">0</span>
+                    <span class="stat-label">Trabajo</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-estudio">0</span>
+                    <span class="stat-label">Estudio</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-personal">0</span>
+                    <span class="stat-label">Personal</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Trabajo Práctico Nº1 — Programación II — UTN Facultad Regional Rosario</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
