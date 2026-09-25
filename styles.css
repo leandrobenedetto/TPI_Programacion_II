@@ -302,6 +302,7 @@ body {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(58, 109, 240, 0.15);
 }
+
 /* ESTADOS DE VALIDACIÓN EN TIEMPO REAL (JS agrega estas clases, pasa cuando el usuario interactúa con el campo) */
 .form-field input.invalid,
 .form-field select.invalid,
@@ -418,4 +419,103 @@ body {
     text-align: center;
     font-weight: bold;
     min-height: 1.2em;
+}
+
+/* --ACERCA DE-- */
+.about-section {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+
+.tech-list,
+.team-list {
+    padding-left: 20px;
+}
+
+/* footer --*/
+.site-footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    padding: 16px;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+}
+
+/*--- BREAKPOINT 1: TABLET (768px) — MENÚ HAMBURGUESA ---*/
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition);
+    }
+
+    .menu-toggle[aria-expanded="true"] ~ .main-nav {
+        max-height: 300px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 30px;
+    }
+
+    .main-nav a {
+        display: block;
+        padding: 12px 0;
+    }
+}
+
+
+/* --- BREAKPOINT 2: CELULAR (480px) — STACK VERTICAL---*/
+@media (max-width: 480px) {
+    .site-header {
+        padding: 12px 16px;
+    }
+
+    .site-header h1 {
+        font-size: 1.1rem;
+    }
+
+    .container {
+        padding: 20px 14px;
+    }
+
+    .task-grid,
+    .stats-grid {
+        grid-template-columns: 1fr; /* 1 columna / stack vertical */
+    }
+
+    .tasks-toolbar .filters {
+        flex-direction: column;
+    }
+
+    .form-section {
+        padding: 18px;
+    }
+}
+
+/* FILTROS: FLEXBOX */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.filters select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
 }
