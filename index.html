@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="styles.css">
     <script>
         // aplica el tema guardado antes de pintar, para evitar el flash blanco/negro
-        (function () {                                                  // se declara una función
-            const tema = localStorage.getItem("theme") || "light";      // una constante que almacena el tema guardado O el tema por defecto
-            document.documentElement.setAttribute("data-theme", tema);  // se aplica el tema al elemento raíz (al <html>)
+        (function () {
+            const tema = localStorage.getItem("theme") || "light";
+            document.documentElement.setAttribute("data-theme", tema);
         })();
     </script>
 </head>
@@ -22,7 +22,6 @@
             <h1>Gestor de Tareas</h1>
         </div>
 
-        <!-- El "botón hamburguesa" se muestra nomás como breakpoint en tablet/celular -->
         <div class="header-actions">
         <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
             <span class="theme-icon">🌙</span>
@@ -47,7 +46,14 @@
         <section class="tasks-toolbar">
             <h2>Mis tareas</h2>
 
+            <p>Pendientes: <span id="contador-pendientes">0</span> | Completadas: <span id="contador-completadas">0</span></p>
+
             <div class="filters">
+                <select id="filter-status">
+                    <option value="">Todos los estados</option>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="completada">Completada</option>
+                </select>
                 <select id="filter-priority">
                     <option value="">Todas las prioridades</option>
                     <option value="alta">Alta</option>
@@ -60,14 +66,16 @@
                     <option value="estudio">Estudio</option>
                     <option value="personal">Personal</option>
                 </select>
+                <select id="sort-date">
+                    <option value="">Sin ordenar</option>
+                    <option value="asc">Fecha: más próxima primero</option>
+                    <option value="desc">Fecha: más lejana primero</option>
+                </select>
             </div>
         </section>
 
         <section class="tasks-list-section">
-                <!-- app.js renderiza acá cada tarea del modelo de datos:
-                { id, titulo, descripcion, fechaVencimiento, prioridad, categoria, recordatorio, completado } -->
             <div id="task-list" class="task-grid">
-                <!-- Vacío porque se renderiza desde app.js. Se llena con datos en tiempo de ejecución -->
             </div>
 
             <p id="empty-state" class="empty-state" hidden>
